@@ -1,7 +1,7 @@
 
 import numpy as np
 from scipy.integrate import ode
-
+import random
 
 # ------------------------------
 def lorenz_rhs(sigma, rho, beta):
@@ -24,3 +24,10 @@ def lorenz(q0, t0, t1, sigma = 10.0, rho = 28.0, beta = 8.0/3, dt = 0.01):
         solution.append(solver.y)
 
     return np.asarray(solution)
+
+
+observational_data = lorenz([5.1, 5.1, 5.1], 0.0, 10.0, dt = 0.05)
+nt, _ = np.shape(observational_data)
+for t in range(nt):
+    for k in range(3):
+        observational_data[t,k] += random.normalvariate(0.0, 0.35)
