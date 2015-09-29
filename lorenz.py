@@ -6,11 +6,21 @@ import random
 # ------------------------------
 def lorenz_rhs(sigma, rho, beta):
     def F(t, q):
-        return [sigma * (q[1] - q[0]),
-                q[0] * (rho - q[2]) - q[1],
-                q[0] * q[1] - beta * q[2]]
+        return np.array([sigma * (q[1] - q[0]),
+                         q[0] * (rho - q[2]) - q[1],
+                         q[0] * q[1] - beta * q[2]])
 
     return F
+
+
+# -------------------------------
+def lorenz_grad(sigma, rho, beta):
+    def G(t, q):
+        return np.array([[-sigma,     +sigma, 0.0  ],
+                         [rho - q[2], -1.0,   -q[0]],
+                         [q[1],       q[0],   -beta]])
+
+    return G
 
 
 # -----------------------------------------------------------------------
